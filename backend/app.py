@@ -9,6 +9,8 @@ from flask_migrate import Migrate
 from flask_bcrypt import Bcrypt
 from flask_cors import CORS
 from database import db
+from ml.predict import predict_salary
+
 load_dotenv()
 
 
@@ -20,7 +22,7 @@ app = Flask(__name__)
 app.config.from_object(Config)
 
 Session(app)
-
+CORS(app, supports_credentials=True)
 
 db.init_app(app)
 from models import *
@@ -121,7 +123,7 @@ def getSession():
         return jsonify({
             'success':False,
             'error':f'No user is logged in for now'
-        }),400
+        }),401
     return jsonify({
         'success':True,
         'message':f'Session is active',
@@ -152,7 +154,7 @@ def create_application():
     if not user_id:
         return jsonify({
            'success':False,
-           'error':f'Unauthorized' 
+           'error':f'Unauthorized not logged in' 
         }),401
     
     if not application :
@@ -169,11 +171,23 @@ def create_application():
                 'succes':False,
                 'error':f'Missing required field : {field}'
             }),400
+        
+    prediction_data = {
+        'years_of_experience': application.get('years_of_experience', 0),
+        'job_title': application.get('job_title', ''),
+        'location': application.get('location', ''),
+        'required_skills': application.get('required_skills', ''),
+        'education_level': 5  
+    }    
     try:
+        predicted = predict_salary(prediction_data)
+
+
         application = Application(user_id=user_id,company_name=application['company_name'],job_title=application['job_title'],location=application['location'],
                                   job_description=application['job_description'],required_skills=application['required_skills'],
                                   years_of_experience=application['years_of_experience'],date_applied=application['date_applied'],
-                                  posted_salary=application['posted_salary'])
+                                  posted_salary=application['posted_salary'],
+                                  predicted_salary=f'{predicted}$')
         db.session.add(application)
         db.session.commit()
         return jsonify({
@@ -237,7 +251,7 @@ def get_applications():
     if not user_id:
         return jsonify({
               'success':False,
-              'error':f'Unauthorized' 
+              'error':f'Unauthorized not logged in' 
         })
     try :
         applications = Application.query.filter_by(user_id=user_id).all()
@@ -316,4 +330,4 @@ def get_application(id):
         }),500
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='127.0.0.1', port=5000) 

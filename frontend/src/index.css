@@ -1,0 +1,104 @@
+/* Login form styles — neobrutalist, matches page look but clearly a form */
+
+.neobrutalist-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    padding: 28px;
+    box-sizing: border-box;
+    background: #ffffff; /* keep page bg consistent */
+}
+
+/* Card wrapper so the login looks like a distinct form block */
+.neobrutalist-form{
+    width: 100%;
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 28px;
+    background: #ffffff;
+    border: 10px solid #ff69b4;      /* pink frame */
+    box-shadow: 12px 12px 0 #000000; /* black block shadow */
+    box-sizing: border-box;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Title */
+.neobrutalist-title{
+    margin: 0;
+    font-size: 26px;
+    line-height: 1;
+    font-weight: 900;
+    color: #000000;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: left;
+}
+
+/* Inputs stacked, full width */
+.neobrutalist-input{
+    width: 100%;
+    padding: 12px 14px;
+    font-size: 15px;
+    font-weight: 800;
+    color: #000000;
+    background: #ffffff;
+    border: 6px solid #000000;          /* black border */
+    box-shadow: 8px 8px 0 #ff69b4;      /* pink shadow accent */
+    outline: none;
+    box-sizing: border-box;
+    text-transform: none;
+}
+
+/* placeholder style to keep bold look */
+.neobrutalist-input::placeholder{
+    color: #7a7a7a;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+/* Primary button */
+.neobrutalist-button{
+    width: 100%;
+    padding: 14px 18px;
+    font-size: 16px;
+    font-weight: 900;
+    color: #000000;
+    background: #ff69b4;                /* pink button */
+    border: 6px solid #000000;
+    box-shadow: 10px 10px 0 #000000;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Hover / active */
+.neobrutalist-button:hover{
+    transform: translate(-4px, -4px);
+    background: #e91e63; /* slightly darker pink */
+    box-shadow: 14px 14px 0 #000000;
+}
+
+/* small screens: keep it readable and stacked */
+@media (max-width: 520px){
+    .neobrutalist-form{
+        padding: 20px;
+        border-width: 8px;
+        box-shadow: 8px 8px 0 #000000;
+    }
+    .neobrutalist-title{
+        font-size: 20px;
+    }
+    .neobrutalist-input{
+        padding: 10px 12px;
+        font-size: 14px;
+        border-width: 5px;
+    }
+    .neobrutalist-button{
+        padding: 12px;
+        border-width: 5px;
+        font-size: 15px;
+    }
+}
