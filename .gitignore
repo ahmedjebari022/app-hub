@@ -1,3 +1,13 @@
 backend/venv
 backend/.env
 frontend/.env
+
+
+backend/ml/*.pkl
+backend/ml/model_*.pkl
+backend/ml/*.joblib
+backend/ml/checkpoints/
+frontend/node_modules
+
+
+flask_session/
