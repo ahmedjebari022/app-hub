@@ -8,7 +8,9 @@ backend/ml/model_*.pkl
 backend/ml/*.joblib
 backend/ml/checkpoints/
 backend/ml/salary_model.pkl
+backend/model_artifacts.pkl
 frontend/node_modules
+backend/datasets/survey_results_public.csv
 
 
 flask_session/
