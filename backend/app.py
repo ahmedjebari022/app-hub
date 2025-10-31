@@ -203,6 +203,7 @@ def create_application():
 @app.route('/applications/<int:id>',methods=['PATCH'])
 def update_application(id):
     data=request.get_json()
+    print(f'data: {data}')
     user_id = session.get('user_id')
     if not user_id:
         return jsonify({
@@ -289,6 +290,8 @@ def get_applications():
 @app.route('/applications/<int:id>',methods=['GET'])
 def get_application(id):
     user_id = session.get('user_id')
+    print(f'params: {id}')
+    
     if not user_id:
         return jsonify({
               'success':False,
@@ -328,6 +331,22 @@ def get_application(id):
             'success':False,
             'error':f'{e}'
         }),500
+
+
+@app.route('/auth/check', methods=['GET'])
+def check_auth():
+    if 'user_id' in session:
+        user = User.query.get(session['user_id'])
+        return jsonify({
+            'authenticated': True,
+            'user': {
+                'id': user.id,
+                'email': user.email,
+                'username': user.username
+            }
+        }), 200
+    return jsonify({'authenticated': False}), 401
+
 
 if __name__ == '__main__':
     app.run(debug=True, host='127.0.0.1', port=5000) 

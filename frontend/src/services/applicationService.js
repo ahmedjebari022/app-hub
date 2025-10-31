@@ -14,16 +14,14 @@ export const applicationService = {
     },
 
     getApplicationById : async (id) =>{
-        return await api.get('/applications',{
-            params:{id}
-        })
+        return await api.get(`/applications/${id}`)
+    
     },
 
     updateApplicationById : async (id,updateData) =>{
-        return await api.patch('/applications',{
-            params:{id},
-            data:updateData
-        })
+        return await api.patch(`/applications/${id}`,
+            updateData
+        )
     }
 
     

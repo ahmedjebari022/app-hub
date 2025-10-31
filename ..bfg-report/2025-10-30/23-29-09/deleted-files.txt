@@ -1,0 +1,3 @@
+dbb23ce4dfafcd71032421d36b74df8697d58d1c 4504 model_artifacts.pkl
+26c1a622843b062158cdec10298248fec438858f 117082513 salary_model.pkl
+d59ff6595b8e6cc78f037d24910b6e38b708aec8 158626799 survey_results_public.csv

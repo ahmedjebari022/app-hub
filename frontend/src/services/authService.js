@@ -14,7 +14,7 @@ export const authService = {
     },
 
     me : async ()=> {
-        return await api.get('/me');
+        return await api.get('/auth/check');
     }
 
 }
